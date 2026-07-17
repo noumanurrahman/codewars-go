@@ -9,8 +9,7 @@ func MakeNegative(num int) int {
 	if num < 0 {
 		return num
 	}
-	zero := num - num
-	return zero - num
+	return 0 - num
 }
 
 func SmallestIntegerFinder(numbers []int) int {
@@ -85,4 +84,15 @@ func SumDigits(number int) int {
 	}
 
 	return sum
+}
+
+func DigitalRoot(n int) int {
+	result := 0
+	sum := SumDigits(n)
+	if sum > 9 {
+		result = DigitalRoot(sum)
+	} else {
+		result = sum
+	}
+	return result
 }
