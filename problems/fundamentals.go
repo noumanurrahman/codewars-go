@@ -96,3 +96,19 @@ func DigitalRoot(n int) int {
 	}
 	return result
 }
+
+func MinMax(arr []int) [2]int {
+	lowest := arr[0]
+	highest := arr[0]
+
+	for _, price := range arr {
+		if price < lowest {
+			lowest = price
+		}
+		if price > highest {
+			highest = price
+		}
+	}
+
+	return [2]int{lowest, highest}
+}
