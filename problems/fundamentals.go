@@ -1,6 +1,8 @@
 package problems
 
 import (
+	"fmt"
+	"math"
 	"strings"
 )
 
@@ -111,4 +113,48 @@ func MinMax(arr []int) [2]int {
 	}
 
 	return [2]int{lowest, highest}
+}
+
+func getDigitsMath(n int) []int {
+	// Handle negative numbers
+	if n < 0 {
+		n = -n
+	}
+
+	// Edge case for zero
+	if n == 0 {
+		return []int{0}
+	}
+
+	var digits []int
+	for n > 0 {
+		digits = append(digits, n%10)
+		n /= 10
+	}
+
+	for i, j := 0, len(digits)-1; i < j; i, j = i+1, j-1 {
+		digits[i], digits[j] = digits[j], digits[i]
+	}
+
+	return digits
+}
+
+func SumDigPow(a, b uint64) []uint64 {
+	result := []uint64{}
+	for i := a; i <= b; i++ {
+		fmt.Println("Checking", i)
+		digits := getDigitsMath(int(i))
+		var sum float64 = 0
+		fmt.Println("Digits:", digits)
+
+		for index := range digits {
+			num := math.Pow(float64(digits[index]), float64(index+1))
+			sum += num
+		}
+
+		if sum == float64(i) {
+			result = append(result, uint64(i))
+		}
+	}
+	return result
 }
